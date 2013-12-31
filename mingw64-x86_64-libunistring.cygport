@@ -1,0 +1,23 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-libunistring"
+VERSION=0.9.3
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Unicode string library for Win64 toolchain"
+DESCRIPTION="This library provides functions for manipulating Unicode
+strings and for manipulating C strings according to the Unicode standard."
+HOMEPAGE="http://www.gnu.org/software/libunistring/"
+SRC_URI="mirror://gnu/libunistring/libunistring-${VERSION}.tar.gz"
+SRC_DIR="libunistring-${VERSION}"
+
+CYGCONF_ARGS="--enable-threads=win32"
+
+src_install() {
+	cd ${B}
+	cyginstall INFO_DEPS=
+
+	# duplicate of native libunistring-doc
+	rm -fr ${D}/usr/share/doc/${NAME}/html
+}
